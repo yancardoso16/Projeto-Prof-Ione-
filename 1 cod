@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    char titulo[100];
+    char descricao[1000];
+    int prioridade;
+    int prazo;
+
+    printf("=== Etapa 1: Cadastro de Tarefa ---\n");
+
+    printf("Digite o titulo: ");
+    scanf(" %[^\n]", titulo); 
+
+    printf("Digite a descricao: ");
+    scanf(" %[^\n]", descricao);
+
+    printf("Prioridade (1-baixa, 2-media, 3-alta): ");
+    scanf("%d", &prioridade);
+
+    printf("Qual e o prazo em dias: ");
+    scanf("%d", &prazo);
+
+    printf("\n--- Tarefa Cadastrada ---\n");
+    printf("Titulo: %s\n", titulo);
+    printf("Descricao: %s\n", descricao);
+    printf("Prioridade: %d\n", prioridade);
+    printf("Prazo: %d dias\n", prazo);
+
+    return 0;
+}
