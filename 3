@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+struct Tarefa {
+    char titulo[100];
+    char descricao[300];
+    int prioridade;
+    int prazo;
+};
+
+int main() {
+    struct Tarefa lista[50];
+    int contador = 0;
+    char continuar;
+    int i;
+
+    printf("=== Etapa 4: Sistema de Gerenciamento de Tarefas ---\n");
+
+    do {
+        if (contador >= 50) {
+            printf("Erro: Limite de 50 tarefas atingido.\n");
+            break;
+        }
+
+        printf("\n--- Cadastrando Tarefa %d ---\n", contador + 1);
+
+        printf("Digite o titulo: ");
+        scanf(" %[^\n]", lista[contador].titulo);
+
+        printf("Digite a descricao: ");
+        scanf(" %[^\n]", lista[contador].descricao);
+
+        printf("Prioridade (1-baixa, 2-media, 3-alta): ");
+        scanf("%d", &lista[contador].prioridade);
+
+        printf("Prazo (dias restantes): ");
+        scanf("%d", &lista[contador].prazo);
+
+        contador++;
+
+        printf("Deseja cadastrar outra? (s/n): ");
+        scanf(" %c", &continuar);
+
+    } while (continuar == 's' || continuar == 'S');
+
+    printf("\n--- Lista Completa de Tarefas ---\n");
+    if (contador == 0) {
+        printf("Nenhuma tarefa foi cadastrada.\n");
+    } else {
+        for (i = 0; i < contador; i++) {
+            printf("\n--- Tarefa %d ---\n", i + 1);
+            printf("Titulo: %s\n", lista[i].titulo);
+            printf("Descricao: %s\n", lista[i].descricao);
+            printf("Prioridade: %d\n", lista[i].prioridade);
+            printf("Prazo: %d dias\n", lista[i].prazo);
+        }
+    }
+
+    return 0;
+}
