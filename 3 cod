@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+int main() {
+
+    char tarefas[100][100];
+    int contador = 0;
+    char continuar;
+    int i;
+
+    printf("=== Etapa 3: Cadastro de Varias Tarefas ---\n");
+
+    do {
+        if (contador >= 100) {
+            printf("Erro: Limite de 100 tarefas atingido.\n");
+            break;
+        }
+
+        printf("\nDigite o titulo da tarefa %d: ", contador + 1);
+        scanf(" %[^\n]", tarefas[contador]);
+        contador++;
+
+        printf("Deseja cadastrar outra? (s/n): ");
+        scanf(" %c", &continuar);
+
+    } while (continuar == 's' || continuar == 'S');
+
+    printf("\n--- Todas as Tarefas Cadastradas ---\n");
+
+    if (contador == 0) {
+        printf("Nenhuma tarefa foi cadastrada.\n");
+    } else {
+        for (i = 0; i < contador; i++) {
+            printf("Tarefa %d: %s\n", i + 1, tarefas[i]);
+        }
+    }
+
+    return 0;
+}
