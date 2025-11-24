@@ -1,0 +1,168 @@
+#include <stdio.h>
+
+// Molde da Tarefa
+struct Tarefa {
+    char titulo[100];
+    char descricao[300];
+    int prioridade;
+    int prazo;
+};
+
+// Variaveis
+struct Tarefa lista[50];
+int contador = 0;
+
+// ===== FUNCOES =====
+
+int cadastrarTarefa() {
+    printf("\n--- 1. Cadastrar Tarefa ---\n");
+    
+    if (contador >= 50) {
+        printf("Erro: Limite de 50 tarefas atingido.\n");
+        return 0;
+    }
+
+    printf("Digite o titulo: ");
+    scanf(" %[^\n]", lista[contador].titulo);
+
+    printf("Digite a descricao: ");
+    scanf(" %[^\n]", lista[contador].descricao);
+
+    printf("Prioridade (1-baixa, 2-media, 3-alta): ");
+    scanf("%d", &lista[contador].prioridade);
+
+    printf("Prazo (dias restantes): ");
+    scanf("%d", &lista[contador].prazo);
+    
+    contador++;
+    printf("Tarefa cadastrada com sucesso!\n");
+    return 0;
+}
+
+int listarTarefas() {
+    printf("\n--- 2. Listar Tarefas ---\n");
+    int i;
+
+    if (contador == 0) {
+        printf("Nenhuma tarefa cadastrada.\n");
+    } else {
+        for (i = 0; i < contador; i++) {
+            printf("\n--- Tarefa %d ---\n", i + 1);
+            printf("Titulo: %s\n", lista[i].titulo);
+            printf("Descricao: %s\n", lista[i].descricao);
+            printf("Prioridade: %d\n", lista[i].prioridade);
+            printf("Prazo: %d dias\n", lista[i].prazo);
+
+            if (lista[i].prazo <= 0) {
+                printf("Status: VENCIDA!\n");
+            }
+        }
+    }
+    return 0;
+}
+
+int editarTarefa() {
+    printf("\n--- 3. Editar Tarefa ---\n");
+    int num;
+
+    if (contador == 0) {
+        printf("Nenhuma tarefa para editar.\n");
+        return 0;
+    }
+
+    printf("Qual tarefa deseja editar (1 a %d)? ", contador);
+    scanf("%d", &num);
+
+    if (num < 1 || num > contador) {
+        printf("Erro: Tarefa invalida.\n");
+        return 0;
+    }
+
+    num--;
+
+    printf("Editando: %s\n", lista[num].titulo);
+
+    printf("Digite o NOVO titulo: ");
+    scanf(" %[^\n]", lista[num].titulo);
+
+    printf("Digite a NOVA descricao: ");
+    scanf(" %[^\n]", lista[num].descricao);
+
+    printf("Digite a NOVA prioridade: ");
+    scanf("%d", &lista[num].prioridade);
+
+    printf("Digite o NOVO prazo: ");
+    scanf("%d", &lista[num].prazo);
+
+    printf("Tarefa editada com sucesso!\n");
+    return 0;
+}
+
+int removerTarefa() {
+    printf("\n--- 4. Remover Tarefa ---\n");
+    int num, i;
+
+    if (contador == 0) {
+        printf("Nenhuma tarefa para remover.\n");
+        return 0;
+    }
+
+    printf("Qual tarefa deseja remover (1 a %d)? ", contador);
+    scanf("%d", &num);
+
+    if (num < 1 || num > contador) {
+        printf("Erro: Tarefa invalida.\n");
+        return 0;
+    }
+
+    num--;
+
+    for (i = num; i < contador - 1; i++) {
+        lista[i] = lista[i + 1];
+    }
+
+    contador--;
+    printf("Tarefa removida com sucesso!\n");
+    return 0;
+}
+
+// ===== FUNÇÃO PRINCIPAL =====
+
+int main() {
+    int opcao = -1;
+
+    do {
+        printf("\n\n--- SISTEMA DE GERENCIAMENTO DE TAREFAS PESSOAIS ---\n");
+        printf("1. Cadastrar Tarefa\n");
+        printf("2. Listar Tarefas\n");
+        printf("3. Editar Tarefa\n");
+        printf("4. Remover Tarefa\n");
+        printf("0. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                cadastrarTarefa();
+                break;
+            case 2:
+                listarTarefas();
+                break;
+            case 3:
+                editarTarefa();
+                break;
+            case 4:
+                removerTarefa();
+                break;
+            case 0:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opcao invalida. Tente novamente.\n");
+                break;
+        }
+
+    } while (opcao != 0);
+
+    return 0;
+}
